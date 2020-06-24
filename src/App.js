@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import EditorCanvas from './components/EditorCanvas';
+import { Canvas } from 'react-three-fiber';
+import { Controls } from 'react-three-gui';
+import { inject, Provider } from 'mobx-react';
 
-function App() {
+function App({ stores }) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <Canvas
+        camera={{
+          zoom: 40,
+        }}
+        orthographic={true}
+        style={{ width: '100vw', height: '100vh' }}
+      >
+        <Provider {...stores}>
+          <EditorCanvas />
+        </Provider>
+      </Canvas>
+      <Controls />
+    </React.Fragment>
   );
 }
 
-export default App;
+export default inject('stores')(App);
