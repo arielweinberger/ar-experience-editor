@@ -1,8 +1,9 @@
 import React from 'react';
-import EditorCanvas from './components/EditorCanvas';
 import { Canvas } from 'react-three-fiber';
 import { Controls } from 'react-three-gui';
-import { inject, Provider } from 'mobx-react';
+import { rootStore } from './reducers';
+import { Provider } from 'react-redux';
+import ExperienceCanvas from './containers/ExperienceCanvas';
 
 function App({ stores }) {
   return (
@@ -14,8 +15,8 @@ function App({ stores }) {
         orthographic={true}
         style={{ width: '100vw', height: '100vh' }}
       >
-        <Provider {...stores}>
-          <EditorCanvas />
+        <Provider store={rootStore}>
+          <ExperienceCanvas />
         </Provider>
       </Canvas>
       <Controls />
@@ -23,4 +24,4 @@ function App({ stores }) {
   );
 }
 
-export default inject('stores')(App);
+export default App;

@@ -7,13 +7,13 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "drei": "0.0.60",
-    "mobx": "^5.15.4",
-    "mobx-react": "^6.2.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
     "react-three-fiber": "^4.2.10",
     "react-three-gui": "^0.1.5",
+    "redux": "^4.0.5",
     "three": "^0.117.1"
   },
   "scripts": {
@@ -48,6 +48,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.10.3",
     "customize-cra": "^1.0.0",
-    "react-app-rewired": "^2.1.6"
+    "react-app-rewired": "^2.1.6",
+    "redux-devtools-extension": "^2.13.8"
   }
 }
