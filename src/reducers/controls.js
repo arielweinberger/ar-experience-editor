@@ -1,6 +1,7 @@
 const initialState = {
   isOrbitEnabled: true,
-  transformMode: 'scale',
+  transformMode: 'translate',
+  controlledObject: null,
 };
 
 const controls = (state = initialState, action) => {
@@ -9,6 +10,8 @@ const controls = (state = initialState, action) => {
       return { ...state, isOrbitEnabled: action.isOrbitEnabled };
     case 'SET_TRANSFORM_MODE':
       return { ...state, transformMode: action.transformMode };
+    case 'SET_CONTROLLED_OBJECT':
+      return { ...state, controlledObject: action.controlledObject };
     default:
       return state;
   }

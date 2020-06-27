@@ -1,38 +1,49 @@
-import React, { useRef, useEffect, Suspense } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useControl } from 'react-three-gui';
-import Surface from '../components/Surface.js';
-import { OrbitControls, TransformControls, Box } from 'drei';
-import SceneObject from '../components/SceneObject.js';
+import Surface from '../components/Surface';
 import { useThree } from 'react-three-fiber';
-import controlsActions from '../actions/controls';
-import ExperienceControls from './ExperienceControls.js';
+import SaveService from '../services/SaveService';
+import { registerScene, addBulkSceneObjects } from '../actions/scene';
+import SceneLoader from './SceneLoader';
 
 function ExperienceCanvas(props) {
+  const { registerScene } = props;
+  const { scene } = useThree();
+
+  
+  // SaveService.registerScene(scene);
+  
+  useEffect(() => {
+    registerScene(scene);
+    // const loaded = SaveService.load();
+
+    // if (loaded) {
+      // props.addBulkSceneObjects(loaded.objects);
+    // }
+  });
+
   return (
     <React.Fragment>
-      {/* Experience Objects */}
-      <Suspense fallback={null}>
-        <SceneObject scale={[1, 1, 1]} rotation={[1.55, 0, 0]} />
-      </Suspense>
+      <SceneLoader />
 
       {/* Base */}
       <ambientLight />
       <Surface position={[0, 0, 0]} />
       <axesHelper args={[10]} />
-
-      {/* Controls */}
-      <ExperienceControls />
     </React.Fragment>
   );
 }
 
-const mapStateToProps = ({ controls }, ownProps) => ({
-
+const mapStateToProps = ({ controls, scene }) => ({
+  // sceneObjects: scene.objects,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = {
+  registerScene,
+  addBulkSceneObjects,
+};
 
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(ExperienceCanvas));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ExperienceCanvas);

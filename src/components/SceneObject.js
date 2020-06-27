@@ -1,30 +1,52 @@
 import React, { useRef, useEffect } from 'react';
-import { inject, observer } from 'mobx-react';
-import GLTFModel from './GLTFModel';
+import { connect } from 'react-redux';
+import { setControlledObject } from '../actions/controls';
 
-function SceneObject(props) {
-  // const { controlsStore, sceneStore } = props;
+class SceneObject extends React.Component {
+  objectRef = null;
 
-  const obj = useRef();
+  shouldComponentUpdate(e) {
+    if (this.objectRef.exp_skipNextUpdate) {
+      this.objectRef.exp_skipNextUpdate = false;
+      return false
+    }
 
-  const handleOnClick = (e) => {
+    return true;
+  }
+
+  componentDidMount() {
+    this.objectRef.exp_sceneObjectId = this.props.data.sceneObjectId;
+    this.objectRef.exp_tracked = true;
+  }
+
+  handleOnClick = (e) => {
     e.stopPropagation();
-    // controlsStore.setControlled(e.eventObject);
+    this.props.setControlledObject(this.objectRef);
   };
 
-  useEffect(() => {
-    if (obj.current) {
-      // sceneStore.registerObject(obj.current);
-    }
-  });
+  render() {
+    const { data, render } = this.props;
 
-  const renderModel = () => (
-    <group {...props} ref={obj} onClick={handleOnClick}>
-      <GLTFModel onUpdate={() => console.log('GLTF update')} />
-    </group>
-  );
+    const renderModel = () => (
+      <group
+        {...data.transform}
+        ref={ref => this.objectRef = ref}
+        onClick={this.handleOnClick}
+      >
+        {render()}
+      </group>
+    );
 
-  return <React.Fragment>{renderModel()}</React.Fragment>;
+    return (
+      <React.Fragment>{renderModel()}</React.Fragment>
+    );
+  }
 }
 
-export default SceneObject;
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {
+  setControlledObject,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SceneObject);
