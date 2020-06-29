@@ -1,17 +1,14 @@
 import React, { useRef } from 'react';
 import * as THREE from 'three';
 import { Plane } from 'drei';
+import { GridHelper } from 'three';
 
-function Surface(props) {
+function Surface({ scene }) {
+  const gridHelper = new GridHelper(20, 20);
+  scene.add(gridHelper);
+
   return (
-    <mesh
-      position={[0, 0, -0.01]}
-      {...props}
-    >
-      <planeGeometry attach="geometry" args={[10, 10, 32, 32]} />
-      <meshBasicMaterial attach="material" color={0x909399} wireframe={true} side={THREE.DoubleSide} />
-      <lineBasicMaterial />
-    </mesh>
+    <React.Fragment />
   );
 }
 

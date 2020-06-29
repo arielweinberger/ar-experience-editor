@@ -1,5 +1,13 @@
-.container {
+.leftPane {
   position: absolute;
-  width: 100vw;
-  height: 100vh;
+  display: block;
+  z-index: 4;
+  width: 320px;
+  height: 100%;
+  // border: 1px solid red;
+  background: #383E43;
+
+  h2 {
+    color: 'white';
+  }
 }

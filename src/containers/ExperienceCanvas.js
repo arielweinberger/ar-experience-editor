@@ -2,33 +2,31 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Surface from '../components/Surface';
 import { useThree } from 'react-three-fiber';
-import SaveService from '../services/SaveService';
 import { registerScene, addBulkSceneObjects } from '../actions/scene';
 import SceneLoader from './SceneLoader';
+import { PerspectiveCamera } from 'drei';
 
 function ExperienceCanvas(props) {
   const { registerScene } = props;
-  const { scene } = useThree();
+  const { scene, camera } = useThree();
 
+  console.log('cam', camera);
   
-  // SaveService.registerScene(scene);
+  setTimeout(() => { console.log(camera.rotation) }, 1000);
+
+  scene.traverse(obj => obj.frustumCulled = false);
   
   useEffect(() => {
     registerScene(scene);
-    // const loaded = SaveService.load();
-
-    // if (loaded) {
-      // props.addBulkSceneObjects(loaded.objects);
-    // }
   });
 
   return (
     <React.Fragment>
+      <PerspectiveCamera />
       <SceneLoader />
 
-      {/* Base */}
       <ambientLight />
-      <Surface position={[0, 0, 0]} />
+      <Surface scene={scene} />
       <axesHelper args={[10]} />
     </React.Fragment>
   );

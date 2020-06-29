@@ -12,10 +12,10 @@ function App({ stores }) {
       <Overlay />
       <Canvas
         camera={{
-          zoom: 70,
+          fov: 45,
+          position: [-10, 10, 20],
+          zoom: 1,
         }}
-        orthographic={true}
-        style={{ width: '100vw', height: '100vh', zIndex: 0 }}
       >
         <Provider store={rootStore}>
           <ExperienceCanvas />

@@ -1,25 +1,27 @@
 import 'semantic-ui-css/semantic.min.css';
-import React from 'react'
+import React from 'react';
 import styles from './Overlay.module.scss';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import TransformIndicators from './TransformIndicators/TransformIndicators';
-import Toolbar from './Toolbar/Toolbar';
+import UISection from '../../components/Overlay/UISection/UISection';
+import ObjectCatalog from '../../components/Overlay/ObjectCatalog/ObjectCatalog';
 
 export const Overlay = () => {
   return (
-    <div className={styles.container}>
-      <Toolbar />
+    <React.Fragment>
       <TransformIndicators />
-    </div>
+
+      <div className={styles.leftPane}>
+        <UISection>
+          <ObjectCatalog />
+        </UISection>
+      </div>
+    </React.Fragment>
   );
-}
+};
 
-const mapStateToProps = (state) => ({
-  
-})
+const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = {
-  
-}
+const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Overlay)
+export default connect(mapStateToProps, mapDispatchToProps)(Overlay);

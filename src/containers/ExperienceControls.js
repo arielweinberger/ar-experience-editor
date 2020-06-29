@@ -3,10 +3,13 @@ import { connect } from 'react-redux'
 import { TransformControls, OrbitControls } from 'drei'
 import { setOrbitEnabled } from '../actions/controls';
 import { objectTranslateEnd } from '../actions/scene';
+import { useThree } from 'react-three-fiber';
+import { Euler } from 'three';
 
 function ExperienceControls(props) {
   const { controlledObject, objectTranslateEnd, transformMode } = props;
 
+  const { camera, gl } = useThree();
   const transform = useRef();
 
   const onDragChange = e => {
@@ -19,6 +22,8 @@ function ExperienceControls(props) {
   };
 
   useEffect(() => {
+    const euler = new Euler(-0.444145, -0.731450, -0.307748, 'XYZ');
+    camera.setRotationFromEuler(euler);
     const controls = transform.current;
 
     if (!controls) {
@@ -45,6 +50,7 @@ function ExperienceControls(props) {
       />
 
       <OrbitControls
+        args={[camera, gl.domElement]}
         enabled={props.isOrbitEnabled}
         enableDamping={true}
       />
