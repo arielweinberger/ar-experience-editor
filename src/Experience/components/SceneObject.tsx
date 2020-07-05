@@ -1,12 +1,18 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { setControlledObject } from '../actions/controls';
+import { setControlledObject } from '../../actions/controls';
 
-class SceneObject extends React.Component {
-  objectRef = null;
+interface SceneObjectProps {
+  setControlledObject: Function;
+  data: any;
+  render: Function;
+}
+
+class SceneObject extends React.Component<SceneObjectProps> {
+  objectRef;
 
   shouldComponentUpdate(e) {
-    if (this.objectRef.exp_skipNextUpdate) {
+    if (this.objectRef && this.objectRef.exp_skipNextUpdate) {
       this.objectRef.exp_skipNextUpdate = false;
       return false
     }

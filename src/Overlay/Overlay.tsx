@@ -3,8 +3,8 @@ import React from 'react';
 import styles from './Overlay.module.scss';
 import { connect } from 'react-redux';
 import TransformIndicators from './TransformIndicators/TransformIndicators';
-import UISection from '../../components/Overlay/UISection/UISection';
-import ObjectCatalog from '../../components/Overlay/ObjectCatalog/ObjectCatalog';
+import UISection from './components/UISection/UISection';
+import ObjectCatalog from './ObjectCatalog/ObjectCatalog';
 
 export const Overlay = () => {
   return (

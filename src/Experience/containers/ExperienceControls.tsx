@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import { TransformControls, OrbitControls } from 'drei'
-import { setOrbitEnabled } from '../actions/controls';
-import { objectTranslateEnd } from '../actions/scene';
+import { setOrbitEnabled } from '../../actions/controls';
+import { objectTranslateEnd } from '../../actions/scene';
 import { useThree } from 'react-three-fiber';
 import { Euler } from 'three';
 
@@ -24,10 +24,10 @@ function ExperienceControls(props) {
   useEffect(() => {
     const euler = new Euler(-0.444145, -0.731450, -0.307748, 'XYZ');
     camera.setRotationFromEuler(euler);
-    const controls = transform.current;
+    const controls: any = transform.current;
 
     if (!controls) {
-      return null;
+      return;
     }
 
     if (controlledObject) {
@@ -47,7 +47,9 @@ function ExperienceControls(props) {
         ref={transform}
         position={[2,2,0]}
         mode={transformMode}
-      />
+      >
+        <React.Fragment />
+      </TransformControls>
 
       <OrbitControls
         args={[camera, gl.domElement]}

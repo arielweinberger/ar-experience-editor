@@ -23,4 +23,3 @@ export const addBulkSceneObjects = objects => ({
   type: 'ADD_BULK_SCENE_OBJECTS',
   objects,
 });
-

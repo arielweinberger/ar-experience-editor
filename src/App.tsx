@@ -2,11 +2,11 @@ import React from 'react';
 import { Canvas } from 'react-three-fiber';
 import { rootStore } from './reducers';
 import { Provider } from 'react-redux';
-import ExperienceCanvas from './containers/ExperienceCanvas';
-import ExperienceControls from './containers/ExperienceControls';
-import { Overlay } from './containers/Overlay/Overlay';
+import ExperienceCanvas from './Experience/containers/ExperienceCanvas';
+import ExperienceControls from './Experience/containers/ExperienceControls';
+import { Overlay } from './Overlay/Overlay';
 
-function App({ stores }) {
+function App() {
   return (
     <React.Fragment>
       <Overlay />

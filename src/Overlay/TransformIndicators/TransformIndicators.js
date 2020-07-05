@@ -3,7 +3,7 @@ import { Button, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 import styles from './TransformIndicators.module.scss';
-import { setTransformMode } from '../../../actions/controls';
+import { setTransformMode } from '../../actions/controls';
 
 function TransformIndicators(props) {
   const { setTransformMode } = props;
