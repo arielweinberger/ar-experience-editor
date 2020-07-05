@@ -1,22 +1,22 @@
 import { SceneState } from './types';
 import { objectTranslateEnd } from './objectTranslateEnd';
-import { addBulkSceneObjects } from './addBulkSceneObjects';
 import { addSceneObject } from './addSceneObject';
+import { SceneActions } from '../../actions/scene';
 
 const initialState: SceneState = {
   scene: null,
   objects: [],
 };
 
+initialState.objects = JSON.parse(window.localStorage.getItem('exp_1_objects'));
+
 const scene = (state: SceneState = initialState, action) => {
   switch(action.type) {
-    case 'REGISTER_SCENE':
+    case SceneActions.REGISTER_SCENE:
       return { ...state, scene: action.scene };
-    case 'ADD_SCENE_OBJECT':
+    case SceneActions.ADD_SCENE_OBJECT:
       return addSceneObject(state, action);
-    case 'ADD_BULK_SCENE_OBJECTS':
-      return addBulkSceneObjects(state, action);
-    case 'OBJECT_TRANSLATE_END':
+    case SceneActions.OBJECT_TRANSLATE_END:
       return objectTranslateEnd(state, action);
     default:
       return state;

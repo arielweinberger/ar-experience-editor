@@ -1,10 +1,17 @@
 import React from 'react';
 import PrimitiveObject from './PrimitiveObject';
 import { connect } from 'react-redux';
+import { addSceneObject } from '../../actions/scene';
 
-const ObjectCatalog = () => {
+const ObjectCatalog = (props) => {
+  const { addSceneObject } = props;
+
   const handlePrimitiveObjectClick = (type: string) => {
-    
+    console.log('clickPrimitive', type);
+    addSceneObject({
+      type: 'primitive',
+      subtype: type,
+    });
   };
 
   return (
@@ -19,7 +26,7 @@ const ObjectCatalog = () => {
 const mapStateToProps = ({ scene }) => ({});
 
 const mapDispatchToProps = {
-
+  addSceneObject,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ObjectCatalog);

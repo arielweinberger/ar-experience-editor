@@ -1,25 +1,28 @@
+import { AddPrimitiveSceneObjectData } from '../reducers/scene/addSceneObject';
+
+export enum SceneActions {
+  REGISTER_SCENE = 'REGISTER_SCENE',
+  OBJECT_TRANSLATE_END = 'OBJECT_TRANSLATE_NED',
+  ADD_SCENE_OBJECT = 'ADD_SCENE_OBJECT',
+  ADD_BULK_SCENE_OBJECTS = 'ADD_BULK_SCENE_OBJECTS',
+};
 
 export const registerScene = scene => ({
-  type: 'REGISTER_SCENE',
+  type: SceneActions.REGISTER_SCENE,
   scene,
 });
 
-export const registerObjectReference = object => ({
-  type: 'REGISTER_OBJECT_REFERENCE',
-  object,
-});
-
 export const objectTranslateEnd = object => ({
-  type: 'OBJECT_TRANSLATE_END',
+  type: SceneActions.OBJECT_TRANSLATE_END,
   object,
 });
 
-export const addSceneObject = objectData => ({
-  type: 'ADD_SCENE_OBJECT',
+export const addSceneObject = (objectData: AddPrimitiveSceneObjectData) => ({
+  type: SceneActions.ADD_SCENE_OBJECT,
   objectData,
 });
 
 export const addBulkSceneObjects = objects => ({
-  type: 'ADD_BULK_SCENE_OBJECTS',
+  type: SceneActions.ADD_BULK_SCENE_OBJECTS,
   objects,
 });

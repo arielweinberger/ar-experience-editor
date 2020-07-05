@@ -5,16 +5,20 @@ export interface SceneState {
   objects: SceneObject[];
 }
 
+export interface SceneObjectTransform {
+  scale: Vector3;
+  position: Vector3;
+  rotation: Euler;
+}
+
 export interface SceneObject {
   type: 'primitive' | 'gltf';
   sceneObjectId: string;
-  transform: {
-    scale: Vector3,
-    position: Vector3,
-    rotation: Euler,
-  };
+  transform: SceneObjectTransform;
 }
 
 export interface PrimitiveSceneObject extends SceneObject {
+  name: string;
   type: 'primitive';
+  subtype: string;
 }

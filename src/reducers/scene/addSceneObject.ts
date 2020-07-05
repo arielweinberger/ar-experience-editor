@@ -1,11 +1,29 @@
-import { SceneState } from './types';
+import { SceneState, SceneObjectTransform, SceneObject, PrimitiveSceneObject } from './types';
+import { Vector3, Euler } from 'three';
+import { uniqueId } from 'lodash';
 
-export const addSceneObject = (state: SceneState, action) => {
-  const { transform } = action;
+export interface AddPrimitiveSceneObjectData {
+  type: 'primitive';
+  subtype: string;
+  transform?: SceneObjectTransform;
+};
 
-  const object = {
-    name: 'Unnamed',
-    model: './models/person.gltf',
+// Currently ONLY PRIMITIVES
+export const addSceneObject = (state: SceneState, action: { objectData: AddPrimitiveSceneObjectData }) => {
+  const { type, subtype } = action.objectData;
+
+  const sceneObjectId = uniqueId();
+  const transform = {
+    position: new Vector3(0, 0, 0),
+    scale: new Vector3(1, 1, 1),
+    rotation: new Euler(0, 0, 0, 'XYZ'),
+  };
+
+  const obj: PrimitiveSceneObject = {
+    name: `${subtype}_${sceneObjectId}`,
+    sceneObjectId,
+    type,
+    subtype,
     transform,
   };
 
@@ -13,7 +31,21 @@ export const addSceneObject = (state: SceneState, action) => {
     ...state,
     objects: [
       ...state.objects,
-      object,
+      obj,
     ],
   };
+
+  // const object = {
+  //   name: 'Unnamed',
+  //   model: './models/person.gltf',
+  //   transform,
+  // };
+
+  // return {
+  //   ...state,
+  //   objects: [
+  //     ...state.objects,
+  //     object,
+  //   ],
+  // };
 };
