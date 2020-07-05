@@ -31,3 +31,7 @@ body {
   color: black;
   -webkit-font-smoothing: antialiased;
 }
+
+.threeCanvas canvas {
+  outline: 0;
+}

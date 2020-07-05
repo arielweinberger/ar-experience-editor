@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 import { connect } from 'react-redux';
-// import GLTFModel from '../components/GLTFModel';
 import SceneObject from '../components/SceneObject';
 import * as drei from 'drei';
 import { Object3D } from 'three';
@@ -8,9 +7,13 @@ import { Object3D } from 'three';
 const SceneLoader = (props) => {
   const { sceneObjects } = props;
 
+  console.log('SceneLoader rendering');
+
   const renderSceneObjects = () =>
     sceneObjects.map((sceneObject) => {
       const primitiveComponent = React.cloneElement(React.createElement<Object3D>(drei[sceneObject.subtype]), {});
+
+      // console.log('sceneObject', sceneObject);
 
       return (
         <SceneObject

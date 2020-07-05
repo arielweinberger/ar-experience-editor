@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import TransformIndicators from './TransformIndicators/TransformIndicators';
 import UISection from './components/UISection/UISection';
 import ObjectCatalog from './ObjectCatalog/ObjectCatalog';
+import Timeline from './Timeline/Timeline';
 
 export const Overlay = () => {
   return (
@@ -12,9 +13,13 @@ export const Overlay = () => {
       <TransformIndicators />
 
       <div className={styles.leftPane}>
-        <UISection>
+        {/* <UISection>
           <ObjectCatalog />
-        </UISection>
+        </UISection> */}
+      </div>
+
+      <div className={styles.bottomPane}>
+        {/* <Timeline /> */}
       </div>
     </React.Fragment>
   );

@@ -1,0 +1,46 @@
+.appWrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  flex-direction: column;
+}
+
+.topBar {
+  background: #f1f1f1;
+  height: 60px;
+  width: 100%;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.bottomContent {
+  width: 100%;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.4);
+}
+
+.centerContent {
+  width: 100%;
+  display: flex;
+  flex: 1;
+  z-index: 0;
+}
+
+.leftPanel {
+  width: 220px;
+  background: #f6f7f8;
+  background: #f1f1f1;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.4);
+}
+
+.centerPanel {
+  flex: 1;
+  background: #D8D8D8;
+}
+
+.rightPanel {
+  width: 220px;
+  background: #f1f1f1;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.4);
+}

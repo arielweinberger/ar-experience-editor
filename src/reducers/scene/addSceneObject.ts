@@ -1,6 +1,6 @@
-import { SceneState, SceneObjectTransform, SceneObject, PrimitiveSceneObject } from './types';
+import { SceneState, SceneObjectTransform, PrimitiveSceneObject } from './types';
 import { Vector3, Euler } from 'three';
-import { uniqueId } from 'lodash';
+import shortid from 'shortid';
 
 export interface AddPrimitiveSceneObjectData {
   type: 'primitive';
@@ -12,7 +12,7 @@ export interface AddPrimitiveSceneObjectData {
 export const addSceneObject = (state: SceneState, action: { objectData: AddPrimitiveSceneObjectData }) => {
   const { type, subtype } = action.objectData;
 
-  const sceneObjectId = uniqueId();
+  const sceneObjectId = shortid();
   const transform = {
     position: new Vector3(0, 0, 0),
     scale: new Vector3(1, 1, 1),

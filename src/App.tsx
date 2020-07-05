@@ -1,28 +1,34 @@
 import React from 'react';
-import { Canvas } from 'react-three-fiber';
-import { rootStore } from './reducers';
-import { Provider } from 'react-redux';
 import ExperienceCanvas from './Experience/containers/ExperienceCanvas';
-import ExperienceControls from './Experience/containers/ExperienceControls';
 import { Overlay } from './Overlay/Overlay';
+import styles from './App.module.scss';
 
 function App() {
   return (
-    <React.Fragment>
-      <Overlay />
-      <Canvas
-        camera={{
-          fov: 45,
-          position: [-10, 10, 20],
-          zoom: 1,
-        }}
-      >
-        <Provider store={rootStore}>
+    <div className={styles.appWrapper}>
+      {/* <Overlay /> */}
+      <div className={styles.topBar}>
+        Top bar
+      </div>
+
+      <div className={styles.centerContent}>
+        <div className={styles.leftPanel}>
+          Left Panel
+        </div>
+
+        <div className={styles.centerPanel}>
           <ExperienceCanvas />
-          <ExperienceControls />
-        </Provider>
-      </Canvas>
-    </React.Fragment>
+        </div>
+
+        <div className={styles.rightPanel}>
+          Right Panel
+        </div>
+      </div>
+
+      <div className={styles.bottomContent}>
+        ctnt
+      </div>
+    </div>
   );
 }
 
