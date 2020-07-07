@@ -13,10 +13,10 @@ function ExperienceControls(props) {
   const transform = useRef();
 
   const onDragChange = e => {
-    controlledObject.exp_skipNextUpdate = true;
     props.setOrbitEnabled(!e.value);
 
     if (!e.value) {
+      controlledObject.dispatchEvent({ type: 'change' });
       objectTranslateEnd(controlledObject);
     }
   };

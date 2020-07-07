@@ -1,11 +1,11 @@
-import { SceneState, SceneObjectTransform, PrimitiveSceneObject } from './types';
+import { SceneState, ThreeObjectProperties, PrimitiveSceneObject } from './types';
 import { Vector3, Euler } from 'three';
 import shortid from 'shortid';
 
 export interface AddPrimitiveSceneObjectData {
   type: 'primitive';
   subtype: string;
-  transform?: SceneObjectTransform;
+  threeProperties?: ThreeObjectProperties;
 };
 
 // Currently ONLY PRIMITIVES
@@ -13,7 +13,7 @@ export const addSceneObject = (state: SceneState, action: { objectData: AddPrimi
   const { type, subtype } = action.objectData;
 
   const sceneObjectId = shortid();
-  const transform = {
+  const threeProperties = {
     position: new Vector3(0, 0, 0),
     scale: new Vector3(1, 1, 1),
     rotation: new Euler(0, 0, 0, 'XYZ'),
@@ -24,7 +24,7 @@ export const addSceneObject = (state: SceneState, action: { objectData: AddPrimi
     sceneObjectId,
     type,
     subtype,
-    transform,
+    threeProperties,
   };
 
   return {
@@ -34,18 +34,4 @@ export const addSceneObject = (state: SceneState, action: { objectData: AddPrimi
       obj,
     ],
   };
-
-  // const object = {
-  //   name: 'Unnamed',
-  //   model: './models/person.gltf',
-  //   transform,
-  // };
-
-  // return {
-  //   ...state,
-  //   objects: [
-  //     ...state.objects,
-  //     object,
-  //   ],
-  // };
 };

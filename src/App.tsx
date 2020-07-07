@@ -1,35 +1,48 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { HotKeys } from 'react-hotkeys';
 import ExperienceCanvas from './Experience/containers/ExperienceCanvas';
-import { Overlay } from './Overlay/Overlay';
 import styles from './App.module.scss';
+import ObjectDetailsPanel from './Overlay/ObjectDetailsPanel/ObjectDetailsPanel';
+import { ActionCreators as HistoryActionCreators } from 'redux-undo';
 
-function App() {
+function App({ dispatch }) {
+  const keyMap = {
+    UNDO: ['command+z'],
+    REDO: ['command+shift+z'],
+  };
+
+  const keyHandlers = {
+    UNDO: () => dispatch(HistoryActionCreators.undo()),
+    REDO: () => dispatch(HistoryActionCreators.redo()),
+  };
+  
   return (
     <div className={styles.appWrapper}>
       {/* <Overlay /> */}
-      <div className={styles.topBar}>
-        Top bar
-      </div>
+      <div className={styles.topBar}>Top bar</div>
 
       <div className={styles.centerContent}>
-        <div className={styles.leftPanel}>
-          Left Panel
-        </div>
+        <div className={styles.leftPanel}>Left Panel</div>
 
         <div className={styles.centerPanel}>
-          <ExperienceCanvas />
+          <HotKeys
+            keyMap={keyMap}
+            handlers={keyHandlers}
+            style={{ width: '100%', height: '100%' }}
+          >
+            <ExperienceCanvas />
+          </HotKeys>
         </div>
 
         <div className={styles.rightPanel}>
-          Right Panel
+          <ObjectDetailsPanel />
         </div>
       </div>
 
-      <div className={styles.bottomContent}>
-        ctnt
-      </div>
+      <div className={styles.bottomContent}>ctnt</div>
     </div>
   );
 }
 
-export default App;
+export default connect()(App);

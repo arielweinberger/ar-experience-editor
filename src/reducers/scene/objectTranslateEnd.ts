@@ -1,24 +1,12 @@
 import { SceneState } from './types';
+import { syncObjectsFromThreeToState } from './helpers';
 
-export const objectTranslateEnd = (state: SceneState, action) => {
+export const objectTranslateEnd = (state: SceneState, action): SceneState => {
   if (!state.scene) {
     return;
   }
   
-  const syncedObjects = state.objects.map(object => {
-    const threeObject = state.scene.getObjectByProperty('exp_sceneObjectId', object.sceneObjectId);
-
-    const transform = {
-      scale: threeObject.scale.toArray(),
-      position: threeObject.position.toArray(),
-      rotation: threeObject.rotation.toArray(),
-    };
-
-    return {
-      ...object,
-      transform,
-    }
-  });
+  const syncedObjects = syncObjectsFromThreeToState(state);
 
   localStorage.setItem('exp_1_objects', JSON.stringify(syncedObjects));
   return { ...state, objects: syncedObjects };

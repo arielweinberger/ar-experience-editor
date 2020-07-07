@@ -10,7 +10,7 @@ const initialState: SceneState = {
 
 initialState.objects = JSON.parse(window.localStorage.getItem('exp_1_objects'));
 
-const scene = (state: SceneState = initialState, action) => {
+const scene = (state: SceneState = initialState, action): SceneState => {
   switch(action.type) {
     case SceneActions.REGISTER_SCENE:
       return { ...state, scene: action.scene };

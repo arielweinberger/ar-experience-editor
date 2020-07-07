@@ -1,19 +1,17 @@
 import React, { Suspense } from 'react';
-import { connect } from 'react-redux';
 import SceneObject from '../components/SceneObject';
 import * as drei from 'drei';
 import { Object3D } from 'three';
 
-const SceneLoader = (props) => {
-  const { sceneObjects } = props;
-
-  console.log('SceneLoader rendering');
+const SceneLoader = ({ sceneObjects }) => {
+  console.log('SceneLoader rendering', sceneObjects);
 
   const renderSceneObjects = () =>
     sceneObjects.map((sceneObject) => {
-      const primitiveComponent = React.cloneElement(React.createElement<Object3D>(drei[sceneObject.subtype]), {});
-
-      // console.log('sceneObject', sceneObject);
+      const primitiveComponent = React.cloneElement(
+        React.createElement<Object3D>(drei[sceneObject.subtype]),
+        {}
+      );
 
       return (
         <SceneObject
@@ -27,13 +25,4 @@ const SceneLoader = (props) => {
   return <Suspense fallback={null}>{renderSceneObjects()}</Suspense>;
 };
 
-const mapStateToProps = ({ scene }) => ({
-  sceneObjects: scene.objects,
-});
-
-const mapDispatchToProps = {};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(React.memo(SceneLoader));
+export default SceneLoader;

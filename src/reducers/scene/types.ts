@@ -5,7 +5,7 @@ export interface SceneState {
   objects: SceneObject[];
 }
 
-export interface SceneObjectTransform {
+export interface ThreeObjectProperties {
   scale: Vector3;
   position: Vector3;
   rotation: Euler;
@@ -14,7 +14,7 @@ export interface SceneObjectTransform {
 export interface SceneObject {
   type: 'primitive' | 'gltf';
   sceneObjectId: string;
-  transform: SceneObjectTransform;
+  threeProperties: ThreeObjectProperties;
 }
 
 export interface PrimitiveSceneObject extends SceneObject {

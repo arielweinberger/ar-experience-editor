@@ -1,0 +1,30 @@
+.ExpandableSection {
+  .ExpandableSectionHeader {
+    background: #dedede;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+
+    h2 {
+      font-size: 14px;
+      margin: 0;
+      flex: 1;
+    }
+
+    .icon {
+      float: right;
+      width: 30px;
+      line-height: 1;
+    }
+  }
+
+  .ExpandableSectionContent {
+    display: none;
+    padding: 4px;
+
+    &.visible {
+      display: block;
+    }
+  }
+}

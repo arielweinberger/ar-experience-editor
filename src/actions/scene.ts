@@ -3,6 +3,7 @@ import { AddPrimitiveSceneObjectData } from '../reducers/scene/addSceneObject';
 export enum SceneActions {
   REGISTER_SCENE = 'REGISTER_SCENE',
   OBJECT_TRANSLATE_END = 'OBJECT_TRANSLATE_NED',
+  OBJECT_MANUAL_EDIT = 'OBJECT_MANUAL_EDIT',
   ADD_SCENE_OBJECT = 'ADD_SCENE_OBJECT',
   ADD_BULK_SCENE_OBJECTS = 'ADD_BULK_SCENE_OBJECTS',
 };
