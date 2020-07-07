@@ -5,6 +5,7 @@ import ExperienceCanvas from './Experience/containers/ExperienceCanvas';
 import styles from './App.module.scss';
 import ObjectDetailsPanel from './Overlay/ObjectDetailsPanel/ObjectDetailsPanel';
 import { ActionCreators as HistoryActionCreators } from 'redux-undo';
+import ObjectCatalog from './Overlay/ObjectCatalog/ObjectCatalog';
 
 function App({ dispatch }) {
   const keyMap = {
@@ -23,7 +24,9 @@ function App({ dispatch }) {
       <div className={styles.topBar}>Top bar</div>
 
       <div className={styles.centerContent}>
-        <div className={styles.leftPanel}>Left Panel</div>
+        <div className={styles.leftPanel}>
+          <ObjectCatalog />
+        </div>
 
         <div className={styles.centerPanel}>
           <HotKeys

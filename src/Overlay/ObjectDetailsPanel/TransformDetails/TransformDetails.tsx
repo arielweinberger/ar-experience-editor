@@ -4,13 +4,7 @@ import NumericInput from '../NumericInput';
 import { connect } from 'react-redux';
 import { objectTranslateEnd } from '../../../actions/scene';
 
-const TransformDetails = ({ object, objectTranslateEnd }) => {
-  const { position, scale, rotation } = object;
-
-  console.log('TransformDetails', object);
-
-  console.log('obj', object);
-
+const TransformDetails = ({ object, objectTranslateEnd, sceneObjects  }) => {
   const metrics = {
     position: {
       name: 'position',
@@ -58,7 +52,7 @@ const TransformDetails = ({ object, objectTranslateEnd }) => {
 };
 
 const mapStateToProps = ({ scene }) => ({
-  sceneObjects: scene.objects,
+  sceneObjects: scene.present.objects,
 });
 
 export default connect(mapStateToProps, { objectTranslateEnd })(TransformDetails)

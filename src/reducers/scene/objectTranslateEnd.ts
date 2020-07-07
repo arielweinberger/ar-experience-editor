@@ -6,8 +6,6 @@ export const objectTranslateEnd = (state: SceneState, action): SceneState => {
     return;
   }
   
-  const syncedObjects = syncObjectsFromThreeToState(state);
-
-  localStorage.setItem('exp_1_objects', JSON.stringify(syncedObjects));
-  return { ...state, objects: syncedObjects };
+  const objects = syncObjectsFromThreeToState(state);
+  return { ...state, objects };
 };

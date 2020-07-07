@@ -27,11 +27,11 @@ export const addSceneObject = (state: SceneState, action: { objectData: AddPrimi
     threeProperties,
   };
 
+  
+  const objects = [...state.objects, obj];
+
   return {
     ...state,
-    objects: [
-      ...state.objects,
-      obj,
-    ],
+    objects,
   };
 };

@@ -24,8 +24,6 @@ const CanvasContents = connect(
   const { scene } = useThree();
   registerScene(scene);
 
-  console.log('sceneOBjects', sceneObjects);
-
   return (
     <React.Fragment>
       <SceneLoader sceneObjects={sceneObjects} />

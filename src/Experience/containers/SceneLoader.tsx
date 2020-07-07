@@ -4,8 +4,6 @@ import * as drei from 'drei';
 import { Object3D } from 'three';
 
 const SceneLoader = ({ sceneObjects }) => {
-  console.log('SceneLoader rendering', sceneObjects);
-
   const renderSceneObjects = () =>
     sceneObjects.map((sceneObject) => {
       const primitiveComponent = React.cloneElement(

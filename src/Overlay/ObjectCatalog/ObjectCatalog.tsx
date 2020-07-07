@@ -7,7 +7,6 @@ const ObjectCatalog = (props) => {
   const { addSceneObject } = props;
 
   const handlePrimitiveObjectClick = (type: string) => {
-    console.log('clickPrimitive', type);
     addSceneObject({
       type: 'primitive',
       subtype: type,

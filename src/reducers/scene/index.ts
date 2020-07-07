@@ -11,13 +11,19 @@ const initialState: SceneState = {
 initialState.objects = JSON.parse(window.localStorage.getItem('exp_1_objects'));
 
 const scene = (state: SceneState = initialState, action): SceneState => {
+  let newScene;
+
   switch(action.type) {
     case SceneActions.REGISTER_SCENE:
       return { ...state, scene: action.scene };
     case SceneActions.ADD_SCENE_OBJECT:
-      return addSceneObject(state, action);
+      newScene = addSceneObject(state, action);
+      localStorage.setItem('exp_1_objects', JSON.stringify(newScene.objects));
+      return newScene;
     case SceneActions.OBJECT_TRANSLATE_END:
-      return objectTranslateEnd(state, action);
+      newScene = objectTranslateEnd(state, action);
+      localStorage.setItem('exp_1_objects', JSON.stringify(newScene.objects));
+      return newScene;
     default:
       return state;
   } 
