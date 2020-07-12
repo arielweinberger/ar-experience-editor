@@ -6,6 +6,7 @@ import styles from './App.module.scss';
 import ObjectDetailsPanel from './Overlay/ObjectDetailsPanel/ObjectDetailsPanel';
 import { ActionCreators as HistoryActionCreators } from 'redux-undo';
 import ObjectCatalog from './Overlay/ObjectCatalog/ObjectCatalog';
+import AnimationManager from './Overlay/AnimationManager/AnimationManager';
 
 function App({ dispatch }) {
   const keyMap = {
@@ -43,7 +44,10 @@ function App({ dispatch }) {
         </div>
       </div>
 
-      <div className={styles.bottomContent}>ctnt</div>
+      <div className={styles.bottomContent}>
+        {/* <Timeline /> */}
+        <AnimationManager />
+      </div>
     </div>
   );
 }

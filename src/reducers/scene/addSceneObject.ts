@@ -9,10 +9,11 @@ export interface AddPrimitiveSceneObjectData {
 };
 
 // Currently ONLY PRIMITIVES
-export const addSceneObject = (state: SceneState, action: { objectData: AddPrimitiveSceneObjectData }) => {
-  const { type, subtype } = action.objectData;
+export const addSceneObject = (objectData: AddPrimitiveSceneObjectData) => {
+  const { type, subtype } = objectData;
 
   const sceneObjectId = shortid();
+  
   const threeProperties = {
     position: new Vector3(0, 0, 0),
     scale: new Vector3(1, 1, 1),
@@ -27,11 +28,5 @@ export const addSceneObject = (state: SceneState, action: { objectData: AddPrimi
     threeProperties,
   };
 
-  
-  const objects = [...state.objects, obj];
-
-  return {
-    ...state,
-    objects,
-  };
+  return obj;
 };

@@ -1,6 +1,6 @@
 import { SceneState, SceneObject } from './types';
 
-export function syncObjectsFromThreeToState(state: SceneState): SceneObject[] {
+export function syncObjectsFromThreeToState(state: SceneState) {
   const syncedObjects = state.objects.map(object => {
     const threeObject = state.scene.getObjectByProperty('exp_sceneObjectId', object.sceneObjectId);
 
@@ -17,8 +17,4 @@ export function syncObjectsFromThreeToState(state: SceneState): SceneObject[] {
   });
 
   return syncedObjects;
-}
-
-export function syncObjectsFromStateToThree(state: SceneState) {
-  return [...state.objects];
 }

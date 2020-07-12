@@ -2,7 +2,7 @@ const initialState = {
   displayModal: false,
 };
 
-const controls = (state = initialState, action) => {
+const overlay = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_DISPLAY_MODAL':
       return { ...state, displayModal: action.status };
@@ -11,4 +11,4 @@ const controls = (state = initialState, action) => {
   }
 };
 
-export default controls;
+export default overlay;
