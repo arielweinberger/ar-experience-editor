@@ -2,7 +2,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Canvas, useThree, useFrame } from 'react-three-fiber';
 import * as drei from 'drei';
 import { MeshStandardMaterial, Object3D } from 'three';
-import styles from './PrimitiveObject.module.scss';
+import styled from '@emotion/styled';
+
+const CanvasContainer = styled.div`
+  width: 110px !important;
+  height: 110px !important;
+  display: inline-block;
+  background: #808a92;
+  margin-bottom: 0;
+
+  padding: 5px;
+`;
 
 function PrimitiveObjectInternal(props) {
   const {
@@ -61,17 +71,12 @@ export default (props) => {
   };
 
   return (
-    <div
-      className={styles.canvasContainer}
-      onClick={() => props.onClick()}
-    >
+    <CanvasContainer>
       <Canvas
         colorManagement
         camera={{ zoom: 2.5 }}
         onPointerEnter={() => callbacks.onPointerEnter()}
         onPointerLeave={() => callbacks.onPointerLeave()}
-        // onPointerDown={props.onPointerDown}
-        // onPointerUp={props.onPointerUp}
       >
         <PrimitiveObjectInternal
           objectType={props.objectType}
@@ -79,6 +84,6 @@ export default (props) => {
           registerPointerLeaveCallback={(cb) => (callbacks.onPointerLeave = cb)}
         />
       </Canvas>
-    </div>
+    </CanvasContainer>
   );
 };

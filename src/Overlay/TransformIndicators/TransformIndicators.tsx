@@ -1,14 +1,36 @@
 import React from 'react'
-import { Button, Icon } from 'semantic-ui-react';
+import { Button, Icon, SemanticICONS } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 
-import styles from './TransformIndicators.module.scss';
 import { setTransformMode } from '../../actions/controls';
+import styled from '@emotion/styled';
+
+const ButtonsContainer = styled.div`
+  position: absolute;
+  top: 40px;
+  right: 0;
+  padding: 8px;
+  z-index: 1;
+`;
+
+const ButtonContainer = styled.div`
+  margin-bottom: 8px;
+`;
+
+const TransformButton = styled(Button)`
+  display: block;
+`;
+
+interface TransformButton {
+  description: string;
+  icon: SemanticICONS,
+  onClick: () => MouseEvent,
+}
 
 export default function TransformIndicators() {
   const dispatch = useDispatch();
 
-  const buttons = [
+  const buttons: TransformButton[] = [
     {
       description: 'Rotate',
       icon: 'sync alternate',
@@ -27,23 +49,19 @@ export default function TransformIndicators() {
   ];
 
   const renderButtons = () => buttons.map(button => (
-    <div
-      key={button.description}
-      className={styles.buttonContainer}
-    >
-      <Button
+    <ButtonContainer>
+      <TransformButton
         icon
-        className={styles.button}
         onClick={button.onClick}
       >
         <Icon name={button.icon} />
-      </Button>
-    </div>
+      </TransformButton>
+    </ButtonContainer>
   ));
 
   return (
-    <div className={styles.container}>
+    <ButtonsContainer>
       {renderButtons()}
-    </div>
+    </ButtonsContainer>
   )
 }

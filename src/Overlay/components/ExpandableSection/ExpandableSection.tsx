@@ -1,7 +1,32 @@
 import React, { useState } from 'react';
-import './ExpandableSection.scss';
 import { Icon } from 'semantic-ui-react';
 import { SemanticICONS } from 'semantic-ui-react/dist/commonjs/generic';
+import styled from '@emotion/styled';
+
+const Header = styled.div`
+  background: #dedede;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+
+  h2 {
+    font-size: 14px;
+    margin: 0;
+    flex: 1;
+  }
+
+  .icon {
+    float: right;
+    width: 30px;
+    line-height: 1;
+  }
+`;
+
+const Content = styled.div<{ visible: boolean }>`
+  padding: 4px;
+  display: ${(props) => props.visible ? 'block' : 'none'};
+`;
 
 const ExpandableSection = ({ label, children }) => {
   const [expanded, setExpanded] = useState(true);
@@ -10,18 +35,15 @@ const ExpandableSection = ({ label, children }) => {
     (expanded ? 'down' : 'up')) as SemanticICONS;
 
   return (
-    <div className="ExpandableSection">
-      <div
-        className="ExpandableSectionHeader"
-        onClick={() => setExpanded(!expanded)}
-      >
+    <React.Fragment>
+      <Header onClick={() => setExpanded(!expanded)}>
         <h2>{label}</h2>
         <Icon name={caretDirection} />
-      </div>
-      <div className={`ExpandableSectionContent ${expanded ? 'visible' : ''}`}>
+      </Header>
+      <Content visible={!!expanded}>
         {children}
-      </div>
-    </div>
+      </Content>
+    </React.Fragment>
   );
 };
 

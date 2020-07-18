@@ -1,6 +1,19 @@
 import React from 'react';
-import './TransformDetails.scss';
 import NumericInput from '../NumericInput';
+import styled from '@emotion/styled';
+
+const Heading = styled.h3`
+  margin: 0;
+  margin-bottom: 8px;
+  font-size: 14px;
+`;
+
+const Metric = styled.div`
+  input {
+    width: 70px;
+    padding: 0;
+  }
+`;
 
 export default function TransformDetails({ object, onTransformChange }) {
   const metrics = {
@@ -29,22 +42,22 @@ export default function TransformDetails({ object, onTransformChange }) {
   ));
 
   return (
-    <div className="transformDetailsContainer">
-      <h3>Position</h3>
-      <div className="metric">
+    <div>
+      <Heading>Position</Heading>
+      <Metric>
         {renderMetric(metrics.position)}
-      </div>
+      </Metric>
 
-      <h3>Scale</h3>
-      <div className="metric">
+      <Heading>Scale</Heading>
+      <Metric>
         {renderMetric(metrics.scale)}
-      </div>
+      </Metric>
 
 
-      <h3>Rotation</h3>
-      <div className="metric">
+      <Heading>Rotation</Heading>
+      <Metric>
         {renderMetric(metrics.rotation)}
-      </div>
+      </Metric>
     </div>
   );
 };

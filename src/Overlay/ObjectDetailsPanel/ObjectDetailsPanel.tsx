@@ -1,9 +1,18 @@
 import React from 'react';
-import './ObjectDetailsPanel.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import ExpandableSection from '../components/ExpandableSection/ExpandableSection';
 import TransformDetails from './TransformDetails/TransformDetails';
 import { objectTranslateEnd } from '../../actions/scene';
+import styled from '@emotion/styled';
+
+const ObjectDetailsPanelContainer = styled.div`
+  h1 {
+    margin: 0;
+    text-align: center;
+    padding: 10px;
+    font-size: 20px;
+  }
+`;
 
 export default function ObjectDetailsPanel() {
   const { controlledObject } = useSelector(state => state.controls);
@@ -28,8 +37,8 @@ export default function ObjectDetailsPanel() {
   };
 
   return (
-    <div className="ObjectDetailsPanelContainer">
+    <ObjectDetailsPanelContainer>
       {renderControlledObject()}
-    </div>
+    </ObjectDetailsPanelContainer>
   );
 };

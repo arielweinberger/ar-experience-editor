@@ -2,11 +2,11 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { HotKeys } from 'react-hotkeys';
 import ExperienceCanvas from './Experience/containers/ExperienceCanvas';
-import styles from './App.module.scss';
 import ObjectDetailsPanel from './Overlay/ObjectDetailsPanel/ObjectDetailsPanel';
 import { ActionCreators as HistoryActionCreators } from 'redux-undo';
 import ObjectCatalog from './Overlay/ObjectCatalog/ObjectCatalog';
 import AnimationManager from './Overlay/AnimationManager/AnimationManager';
+import * as Layout from './Overlay/layout';
 
 function App() {
   const keyMap = {
@@ -22,35 +22,35 @@ function App() {
   };
   
   return (
-    <div className={styles.appWrapper}>
-      {/* <Overlay /> */}
-      <div className={styles.topBar}>Top bar</div>
+    <Layout.AppWrapper>
+      <Layout.TopBar>
+        Top Bar
+      </Layout.TopBar>
 
-      <div className={styles.centerContent}>
-        <div className={styles.leftPanel}>
+      <Layout.CenterContent>
+        <Layout.LeftPanel>
           <ObjectCatalog />
-        </div>
+        </Layout.LeftPanel>
 
-        <div className={styles.centerPanel}>
-          <HotKeys
+        <Layout.CenterPanel>
+        <HotKeys
             keyMap={keyMap}
             handlers={keyHandlers}
             style={{ width: '100%', height: '100%' }}
           >
             <ExperienceCanvas />
           </HotKeys>
-        </div>
+        </Layout.CenterPanel>
 
-        <div className={styles.rightPanel}>
+        <Layout.RightPanel>
           <ObjectDetailsPanel />
-        </div>
-      </div>
+        </Layout.RightPanel>
+      </Layout.CenterContent>
 
-      <div className={styles.bottomContent}>
-        {/* <Timeline /> */}
+      <Layout.BottomContent>
         <AnimationManager />
-      </div>
-    </div>
+      </Layout.BottomContent>
+    </Layout.AppWrapper>
   );
 }
 
