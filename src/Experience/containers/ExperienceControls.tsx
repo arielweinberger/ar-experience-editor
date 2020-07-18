@@ -1,23 +1,24 @@
 import React, { useEffect, useRef } from 'react'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { TransformControls, OrbitControls } from 'drei'
 import { setOrbitEnabled } from '../../actions/controls';
 import { objectTranslateEnd } from '../../actions/scene';
 import { useThree } from 'react-three-fiber';
 import { Euler } from 'three';
 
-function ExperienceControls(props) {
-  const { controlledObject, objectTranslateEnd, transformMode } = props;
+export default function ExperienceControls() {
+  const { isOrbitEnabled, transformMode, controlledObject } = useSelector(state => state.controls);
+  const dispatch = useDispatch();
 
   const { camera, gl } = useThree();
   const transform = useRef();
 
   const onDragChange = e => {
-    props.setOrbitEnabled(!e.value);
+    dispatch(setOrbitEnabled(!e.value));
 
     if (!e.value) {
       controlledObject.dispatchEvent({ type: 'change' });
-      objectTranslateEnd(controlledObject);
+      dispatch(objectTranslateEnd(controlledObject));
     }
   };
 
@@ -42,7 +43,6 @@ function ExperienceControls(props) {
 
   return (
     <React.Fragment>
-      {/* <TransformControls ref={transform} mode="rotate"></TransformControls> */}
       <TransformControls
         ref={transform}
         position={[2,2,0]}
@@ -53,22 +53,9 @@ function ExperienceControls(props) {
 
       <OrbitControls
         args={[camera, gl.domElement]}
-        enabled={props.isOrbitEnabled}
+        enabled={isOrbitEnabled}
         enableDamping={true}
       />
     </React.Fragment>
   );
 }
-
-const mapStateToProps = ({ controls }, ownProps) => ({
-  isOrbitEnabled: controls.isOrbitEnabled,
-  transformMode: controls.transformMode,
-  controlledObject: controls.controlledObject,
-});
-
-const mapDispatchToProps = {
-  setOrbitEnabled,
-  objectTranslateEnd,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ExperienceControls)

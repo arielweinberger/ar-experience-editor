@@ -1,16 +1,16 @@
 import React from 'react';
 import PrimitiveObject from './PrimitiveObject';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addSceneObject } from '../../actions/scene';
 
-const ObjectCatalog = (props) => {
-  const { addSceneObject } = props;
+export default function ObjectCatalog() {
+  const dispatch = useDispatch();
 
   const handlePrimitiveObjectClick = (type: string) => {
-    addSceneObject({
+    dispatch(addSceneObject({
       type: 'primitive',
       subtype: type,
-    });
+    }));
   };
 
   return (
@@ -21,11 +21,3 @@ const ObjectCatalog = (props) => {
     </React.Fragment>
   );
 };
-
-const mapStateToProps = ({ scene }) => ({});
-
-const mapDispatchToProps = {
-  addSceneObject,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ObjectCatalog);

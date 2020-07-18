@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { HotKeys } from 'react-hotkeys';
 import ExperienceCanvas from './Experience/containers/ExperienceCanvas';
 import styles from './App.module.scss';
@@ -8,11 +8,13 @@ import { ActionCreators as HistoryActionCreators } from 'redux-undo';
 import ObjectCatalog from './Overlay/ObjectCatalog/ObjectCatalog';
 import AnimationManager from './Overlay/AnimationManager/AnimationManager';
 
-function App({ dispatch }) {
+function App() {
   const keyMap = {
     UNDO: ['command+z'],
     REDO: ['command+shift+z'],
   };
+  
+  const dispatch = useDispatch();
 
   const keyHandlers = {
     UNDO: () => dispatch(HistoryActionCreators.undo()),
@@ -52,4 +54,4 @@ function App({ dispatch }) {
   );
 }
 
-export default connect()(App);
+export default App;

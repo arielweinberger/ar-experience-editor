@@ -1,28 +1,28 @@
 import React from 'react'
 import { Button, Icon } from 'semantic-ui-react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import styles from './TransformIndicators.module.scss';
 import { setTransformMode } from '../../actions/controls';
 
-function TransformIndicators(props) {
-  const { setTransformMode } = props;
+export default function TransformIndicators() {
+  const dispatch = useDispatch();
 
   const buttons = [
     {
       description: 'Rotate',
       icon: 'sync alternate',
-      onClick: () => setTransformMode('rotate'),
+      onClick: () => dispatch(setTransformMode('rotate')),
     },
     {
       description: 'Translate',
       icon: 'arrows alternate',
-      onClick: () => setTransformMode('translate'),
+      onClick: () => dispatch(setTransformMode('translate')),
     },
     {
       description: 'Scale',
       icon: 'expand',
-      onClick: () => setTransformMode('scale'),
+      onClick: () => dispatch(setTransformMode('scale')),
     },
   ];
 
@@ -47,16 +47,3 @@ function TransformIndicators(props) {
     </div>
   )
 }
-
-const mapStateToProps = ({ controls }) => ({
-  enabled: Boolean(controls.controlledObject)
-});
-
-const mapDispatchToProps = {
-  setTransformMode,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TransformIndicators);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setControlledObject } from '../../actions/controls';
-import { Vector3, Euler, Object3D } from 'three';
+import { Vector3, Euler } from 'three';
 
 interface SceneObjectProps {
   setControlledObject: Function;
@@ -49,10 +49,8 @@ class SceneObject extends React.Component<SceneObjectProps> {
   }
 }
 
-const mapStateToProps = state => ({});
-
 const mapDispatchToProps = {
   setControlledObject,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SceneObject);
+export default connect(null, mapDispatchToProps)(SceneObject);

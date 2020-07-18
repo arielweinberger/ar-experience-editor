@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Surface from '../components/Surface';
 import { useThree, Canvas } from 'react-three-fiber';
 import { registerScene } from '../../actions/scene';
@@ -8,34 +8,25 @@ import { Provider } from 'react-redux';
 import { rootStore } from '../../reducers';
 import ExperienceControls from './ExperienceControls';
 
-const mapStateToProps = ({ scene }) => ({
-  sceneObjects: scene.present.objects,
-});
+const CanvasContents = () => {
+  const dispatch = useDispatch();
+  const { objects } = useSelector(state => state.scene.present);
 
-const mapDispatchToProps = {
-  registerScene,
-};
-
-const CanvasContents = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)((props) => {
-  const { registerScene, sceneObjects } = props;
   const { scene } = useThree();
-  registerScene(scene);
+  dispatch(registerScene(scene));
 
   return (
     <React.Fragment>
-      <SceneLoader sceneObjects={sceneObjects} />
+      <SceneLoader sceneObjects={objects} />
 
       <ambientLight />
       <Surface scene={scene} />
       <axesHelper args={[10]} />
     </React.Fragment>
   );
-});
+};
 
-export default connect(({ scene }) => ({ scene }), null)(({ dispatch, scene }) => {
+export default () => {
   return (
     <Canvas
       camera={{
@@ -51,4 +42,4 @@ export default connect(({ scene }) => ({ scene }), null)(({ dispatch, scene }) =
       </Provider>
     </Canvas>
   );
-});
+};

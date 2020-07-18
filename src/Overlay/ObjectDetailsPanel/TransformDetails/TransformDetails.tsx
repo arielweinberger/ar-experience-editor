@@ -1,10 +1,8 @@
 import React from 'react';
 import './TransformDetails.scss';
 import NumericInput from '../NumericInput';
-import { connect } from 'react-redux';
-import { objectTranslateEnd } from '../../../actions/scene';
 
-const TransformDetails = ({ object, objectTranslateEnd, sceneObjects  }) => {
+export default function TransformDetails({ object, onTransformChange }) {
   const metrics = {
     position: {
       name: 'position',
@@ -26,7 +24,7 @@ const TransformDetails = ({ object, objectTranslateEnd, sceneObjects  }) => {
       value={object[metric.name][property]}
       onChangeApplied={val => {
         object[metric.name][property] =  val
-        objectTranslateEnd();
+        onTransformChange();
       }} />
   ));
 
@@ -50,9 +48,3 @@ const TransformDetails = ({ object, objectTranslateEnd, sceneObjects  }) => {
     </div>
   );
 };
-
-const mapStateToProps = ({ scene }) => ({
-  sceneObjects: scene.present.objects,
-});
-
-export default connect(mapStateToProps, { objectTranslateEnd })(TransformDetails)

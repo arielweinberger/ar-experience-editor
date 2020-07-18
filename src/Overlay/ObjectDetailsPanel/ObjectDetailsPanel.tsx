@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import './ObjectDetailsPanel.scss';
+import { useSelector, useDispatch } from 'react-redux';
 import ExpandableSection from '../components/ExpandableSection/ExpandableSection';
 import TransformDetails from './TransformDetails/TransformDetails';
+import { objectTranslateEnd } from '../../actions/scene';
 
-const ObjectDetailsPanel = (props) => {
-  const { controlledObject } = props;
+export default function ObjectDetailsPanel() {
+  const { controlledObject } = useSelector(state => state.controls);
+  const dispatch = useDispatch();
 
   const renderControlledObject = () => {
     if (!controlledObject) {
@@ -19,7 +21,7 @@ const ObjectDetailsPanel = (props) => {
         <h1>{name}</h1>
 
         <ExpandableSection label="Transform">
-          <TransformDetails object={controlledObject} />
+          <TransformDetails object={controlledObject} onTransformChange={() => dispatch(objectTranslateEnd(controlledObject))} />
         </ExpandableSection>
       </React.Fragment>
     );
@@ -31,18 +33,3 @@ const ObjectDetailsPanel = (props) => {
     </div>
   );
 };
-
-const mapStateToProps = ({ controls, scene }) => {
-  const { controlledObject } = controls;
-  const { objects } = scene;
-
-  return {
-    controlledObject,
-    sceneObjects: objects,
-  };
-};
-
-const mapDispatchToProps = {
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ObjectDetailsPanel);
