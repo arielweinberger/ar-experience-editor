@@ -1,54 +1,45 @@
 import React from 'react'
-import styled from '@emotion/styled';
 import TimelineRow from '../shared/TimelineRow';
 import classNames from 'classnames';
 import Keyframe from './Keyframe';
-import { useControls, useTimeline, useScene } from '../../../hooks';
+import { useControls, useContextMenu, useKeyframes } from '../../../hooks';
+import { roundPre } from '../../../lib/util/roundPre';
 
-const KeyframesContainer = styled.div`
-  display: flex;
-  overflow: auto;
-  flex-flow: column nowrap;
-  flex: 1 1 0%;
-  padding-bottom: 15px;
-`;
-
-export default function Keyframes() {
-  const { objects } = useScene();
+export default function Keyframes({ sceneObjectId }) {
   const { controlledObject } = useControls();
-  const { keyframes } = useTimeline();
+  const { createContextMenu } = useContextMenu();
+  const { keyframes, addKeyframe, deleteKeyframe } = useKeyframes(sceneObjectId);
 
-  const renderTimelineRows = () =>
-    objects.map((object) => {
-      let className = '';
-
-      const sceneObjectId = object.sceneObjectId;
-
-      if (controlledObject) {
-        className = classNames({ selected: sceneObjectId === controlledObject.exp_sceneObjectId });
-      }
-
-      const objectKeyframes = keyframes[object.name];
-
-      if (!objectKeyframes) {
-        return null;
-      }
-
-      const renderKeyframes = () => objectKeyframes.map(keyframe => <Keyframe time={keyframe.time} id={keyframe.id} key={keyframe.id} />);
+  const renderKeyframes = () => {
+    return keyframes.map(keyframe => {
+      const keyframeContextMenu = e => {
+        e.stopPropagation();
+        const menu = [{ label: 'Delete keyframe', onClick: () => deleteKeyframe(keyframe.keyframeId)}]
+        createContextMenu(menu, e);
+      };
 
       return (
-        <TimelineRow
-          key={sceneObjectId}
-          className={className}
-        >
-          {renderKeyframes()}
-        </TimelineRow>
+        <Keyframe
+          time={keyframe.time}
+          key={keyframe.keyframeId}
+          onContextMenu={e => keyframeContextMenu(e)}
+        />
       );
     });
+  };
+
+  const timelineContextMenu = e => {
+    const rect = e.target.getBoundingClientRect();
+    const time = roundPre(e.clientX - rect.left - 10, 10);
+    const menu = [{ label: 'Add keyframe', onClick: () => addKeyframe(time) }];
+    createContextMenu(menu, e);
+  };
+
+  const selected = controlledObject && controlledObject.exp_sceneObjectId === sceneObjectId;
 
   return (
-    <KeyframesContainer>
-      {renderTimelineRows()}
-    </KeyframesContainer>
+    <TimelineRow className={classNames({ selected })} onContextMenu={e => timelineContextMenu(e)}>
+      {renderKeyframes()}
+    </TimelineRow>
   )
 }

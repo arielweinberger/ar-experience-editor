@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import thumbSvg from './thumb.svg';
+import { roundPre } from '../../../lib/util/roundPre';
 
 const ThumbContainer = styled.div`
   position: absolute;
@@ -59,16 +60,12 @@ const HiddenRangeInput = styled.input`
   }
 `;
 
-function round(N, pre) {
-  return Math.round(N / pre) * pre;
-}
-
 const Timeline = (props) => {
   const { onLocationChange } = props;
   const [time, setTime] = useState(props.time);
 
   const handleThumbInput = (e) => {
-    const value = round(e.target.value, 10);
+    const value = roundPre(e.target.value, 10);
     setTime(value);
     onLocationChange(value)
   };

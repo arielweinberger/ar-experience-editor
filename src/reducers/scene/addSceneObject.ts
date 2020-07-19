@@ -1,4 +1,5 @@
-import { SceneState, ThreeObjectProperties, PrimitiveSceneObject } from './types';
+import { ThreeObjectProperties } from './types';
+import { PrimitiveSceneObject } from './lib/PrimitiveSceneObject';
 import { Vector3, Euler } from 'three';
 import shortid from 'shortid';
 
@@ -20,13 +21,10 @@ export const addSceneObject = (objectData: AddPrimitiveSceneObjectData) => {
     rotation: new Euler(0, 0, 0, 'XYZ'),
   };
 
-  const obj: PrimitiveSceneObject = {
-    name: `${subtype}_${sceneObjectId}`,
-    sceneObjectId,
-    type,
-    subtype,
-    threeProperties,
-  };
+  const primitiveObject = new PrimitiveSceneObject(`${subtype}_${sceneObjectId}`, subtype);
+  primitiveObject.sceneObjectId = sceneObjectId;
+  primitiveObject.type = type;
+  primitiveObject.threeProperties = threeProperties;
 
-  return obj;
+  return primitiveObject;
 };

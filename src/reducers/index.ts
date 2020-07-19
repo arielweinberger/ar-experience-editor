@@ -11,7 +11,7 @@ import timeline from './timeline';
 const rootReducer = combineReducers({
   scene: undoable(immer(scene)),
   controls: immer(controls),
-  overlay,
+  overlay: immer(overlay),
   timeline: undoable(immer(timeline)),
 });
 const rootStore = createStore(rootReducer, composeWithDevTools());

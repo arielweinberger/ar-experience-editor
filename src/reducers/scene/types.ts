@@ -1,4 +1,5 @@
 import { Scene, Vector3, Euler } from 'three';
+import { SceneObject } from './lib/SceneObject';
 
 export interface SceneState {
   scene: Scene;
@@ -11,14 +12,7 @@ export interface ThreeObjectProperties {
   rotation: Euler;
 }
 
-export interface SceneObject {
-  type: 'primitive' | 'gltf';
-  sceneObjectId: string;
-  threeProperties: ThreeObjectProperties;
-}
-
-export interface PrimitiveSceneObject extends SceneObject {
-  name: string;
-  type: 'primitive';
-  subtype: string;
+export interface Keyframe {
+  keyframeId: string,
+  time: number;
 }

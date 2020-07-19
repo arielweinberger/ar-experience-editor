@@ -7,6 +7,7 @@ import { ActionCreators as HistoryActionCreators } from 'redux-undo';
 import ObjectCatalog from './Overlay/ObjectCatalog/ObjectCatalog';
 import AnimationManager from './Overlay/AnimationManager/AnimationManager';
 import * as Layout from './Overlay/layout';
+import ContextMenu from './Overlay/ContextMenu/ContextMenu';
 
 function App() {
   const keyMap = {
@@ -23,6 +24,7 @@ function App() {
   
   return (
     <Layout.AppWrapper>
+      <ContextMenu />
       <Layout.TopBar>
         Top Bar
       </Layout.TopBar>

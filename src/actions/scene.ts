@@ -5,7 +5,8 @@ export enum SceneActions {
   OBJECT_TRANSLATE_END = 'OBJECT_TRANSLATE_END',
   OBJECT_MANUAL_EDIT = 'OBJECT_MANUAL_EDIT',
   ADD_SCENE_OBJECT = 'ADD_SCENE_OBJECT',
-  ADD_BULK_SCENE_OBJECTS = 'ADD_BULK_SCENE_OBJECTS',
+  ADD_OBJECT_KEYFRAME = 'ADD_OBJECT_KEYFRAME',
+  DELETE_OBJECT_KEYFRAME = 'DELETE_OBJECT_KEYFRAME',
 };
 
 export const registerScene = scene => ({
@@ -23,14 +24,22 @@ export const addSceneObject = (objectData: AddPrimitiveSceneObjectData) => ({
   objectData,
 });
 
-export const addBulkSceneObjects = objects => ({
-  type: SceneActions.ADD_BULK_SCENE_OBJECTS,
-  objects,
+export const addObjectKeyframe = (sceneObjectId, time) => ({
+  type: SceneActions.ADD_OBJECT_KEYFRAME,
+  sceneObjectId,
+  time,
+});
+
+export const deleteObjectKeyframe = (sceneObjectId, keyframeId) => ({
+  type: SceneActions.DELETE_OBJECT_KEYFRAME,
+  sceneObjectId,
+  keyframeId,
 });
 
 export default {
   registerScene,
   objectTranslateEnd,
   addSceneObject,
-  addBulkSceneObjects,
-}
+  addObjectKeyframe,
+  deleteObjectKeyframe,
+};

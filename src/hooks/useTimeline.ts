@@ -16,9 +16,11 @@ export default function useTimeline() {
   
   return {
     keyframes: timeline.keyframes,
+    addKeyframe: (sceneObjectId, time) => dispatch(TimelineActions.addKeyframe(sceneObjectId, time)),
+    deleteKeyframe: (sceneObjectId, keyframeId) => dispatch(TimelineActions.deleteKeyframe(sceneObjectId, keyframeId)),
     thumbLocation: timeline.thumbLocation,
     setThumbLocation(value) {
       onThumbLocationChange$.next(value);
-    }
+    },
   }
 }

@@ -1,14 +1,13 @@
-export const setOrbitEnabled = status => ({
-  type: 'SET_MODAL_DISPLAY',
-  status,
-});
+export enum OverlayActions {
+  SET_CONTEXT_MENU = 'SET_CONTEXT_MENU',
+  CLOSE_CONTEXT_MENU = 'CLOSE_CONTEXT_MENU',
+  SET_CONTEXT_MENU_POSITION = 'SET_CONTEXT_MENU_POSITION',
+};
 
-export const setTransformMode = transformMode => ({
-  type: 'SET_TRANSFORM_MODE',
-  transformMode,
-});
+const setContextMenu = (contextMenu, position) => ({ type: OverlayActions.SET_CONTEXT_MENU, contextMenu, position });
+const closeContextMenu = () => ({ type: OverlayActions.CLOSE_CONTEXT_MENU });
 
-export const setControlledObject = controlledObject => ({
-  type: 'SET_CONTROLLED_OBJECT',
-  controlledObject,
-});
+export default {
+  setContextMenu,
+  closeContextMenu,
+}
