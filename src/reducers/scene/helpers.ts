@@ -1,20 +1,16 @@
 import { SceneState, SceneObject } from './types';
 
-export function syncObjectsFromThreeToState(state: SceneState) {
-  const syncedObjects = state.objects.map(object => {
-    const threeObject = state.scene.getObjectByProperty('exp_sceneObjectId', object.sceneObjectId);
+export function syncThreeObjectToState(threeObject, state: SceneState) {
+  console.log(threeObject);
 
-    const threeProperties = {
-      scale: threeObject.scale,
-      position: threeObject.position,
-      rotation: threeObject.rotation,
-    };
+  const sceneObjects = state.objects;
+  console.log('sceneObjects', sceneObjects);
 
-    return {
-      ...object,
-      threeProperties,
-    }
-  });
+  const relevantObject: any = sceneObjects.filter(obj => obj.sceneObjectId = threeObject.exp_sceneObjectId);
 
-  return syncedObjects;
+  relevantObject.threeProperties = {
+    scale: threeObject.scale,
+    position: threeObject.position,
+    rotation: threeObject.rotation,
+  };
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Thumb from './Thumb';
-import { useTimeline } from '../../../hooks/experienceHooks';
+import { useTimeline } from '../../../hooks';
 
 const ScrubberContainer = styled.div`
   overflow: hidden;

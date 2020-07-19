@@ -2,7 +2,7 @@ import React from 'react';
 import ExpandableSection from '../components/ExpandableSection/ExpandableSection';
 import TransformDetails from './TransformDetails/TransformDetails';
 import styled from '@emotion/styled';
-import { useControls, useScene } from '../../hooks/experienceHooks';
+import { useControls, useScene } from '../../hooks';
 
 const ObjectDetailsPanelContainer = styled.div`
   h1 {

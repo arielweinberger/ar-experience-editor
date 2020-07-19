@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import TimelineRow from '../shared/TimelineRow';
 import classNames from 'classnames';
 import Keyframe from './Keyframe';
-import { useControls, useTimeline, useScene } from '../../../hooks/experienceHooks';
+import { useControls, useTimeline, useScene } from '../../../hooks';
 
 const KeyframesContainer = styled.div`
   display: flex;

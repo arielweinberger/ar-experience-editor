@@ -7,6 +7,9 @@ export default function useControls() {
 
   return {
     controlledObject: controls.controlledObject,
+    transformMode: controls.transformMode,
+    isOrbitEnabled: controls.isOrbitEnabled,
+    setOrbitEnabled: (value: boolean) => dispatch(ControlsActions.setOrbitEnabled(value)),
     setTransformMode: (mode) => dispatch(ControlsActions.setTransformMode(mode)),
   };
 }

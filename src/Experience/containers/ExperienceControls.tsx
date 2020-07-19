@@ -1,29 +1,32 @@
-import React, { useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { TransformControls, OrbitControls } from 'drei'
-import { setOrbitEnabled } from '../../actions/controls';
-import { objectTranslateEnd } from '../../actions/scene';
+import React, { useEffect, useRef } from 'react';
+import { TransformControls, OrbitControls } from 'drei';
 import { useThree } from 'react-three-fiber';
 import { Euler } from 'three';
+import { useControls, useScene } from '../../hooks';
 
 export default function ExperienceControls() {
-  const { isOrbitEnabled, transformMode, controlledObject } = useSelector(state => state.controls);
-  const dispatch = useDispatch();
+  const { objectTranslateEnd } = useScene();
+  const {
+    isOrbitEnabled,
+    setOrbitEnabled,
+    transformMode,
+    controlledObject,
+  } = useControls();
 
   const { camera, gl } = useThree();
   const transform = useRef();
 
-  const onDragChange = e => {
-    dispatch(setOrbitEnabled(!e.value));
+  const onDragChange = (e) => {
+    setOrbitEnabled(!e.value);
 
     if (!e.value) {
       controlledObject.dispatchEvent({ type: 'change' });
-      dispatch(objectTranslateEnd(controlledObject));
+      objectTranslateEnd(controlledObject);
     }
   };
 
   useEffect(() => {
-    const euler = new Euler(-0.444145, -0.731450, -0.307748, 'XYZ');
+    const euler = new Euler(-0.444145, -0.73145, -0.307748, 'XYZ');
     camera.setRotationFromEuler(euler);
     const controls: any = transform.current;
 
@@ -45,7 +48,7 @@ export default function ExperienceControls() {
     <React.Fragment>
       <TransformControls
         ref={transform}
-        position={[2,2,0]}
+        position={[2, 2, 0]}
         mode={transformMode}
       >
         <React.Fragment />

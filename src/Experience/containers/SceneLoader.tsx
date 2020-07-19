@@ -2,10 +2,13 @@ import React, { Suspense } from 'react';
 import SceneObject from '../components/SceneObject';
 import * as drei from 'drei';
 import { Object3D } from 'three';
+import { useScene } from '../../hooks';
 
-const SceneLoader = ({ sceneObjects }) => {
+const SceneLoader = () => {
+  const { objects } = useScene();
+
   const renderSceneObjects = () =>
-    sceneObjects.map((sceneObject) => {
+    objects.map((sceneObject) => {
       const primitiveComponent = React.cloneElement(
         React.createElement<Object3D>(drei[sceneObject.subtype]),
         {}

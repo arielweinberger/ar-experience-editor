@@ -1,32 +1,31 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Surface from '../components/Surface';
 import { useThree, Canvas } from 'react-three-fiber';
-import { registerScene } from '../../actions/scene';
 import SceneLoader from './SceneLoader';
 import { Provider } from 'react-redux';
 import { rootStore } from '../../reducers';
 import ExperienceControls from './ExperienceControls';
+import SceneActions from '../../actions/scene';
 
-const CanvasContents = () => {
-  const dispatch = useDispatch();
-  const { objects } = useSelector(state => state.scene.present);
-
+const CanvasContents = React.memo(() => {
   const { scene } = useThree();
-  dispatch(registerScene(scene));
+  const dispatch = useDispatch();
+
+  dispatch(SceneActions.registerScene(scene))
 
   return (
     <React.Fragment>
-      <SceneLoader sceneObjects={objects} />
+      <SceneLoader />
 
       <ambientLight />
-      <Surface scene={scene} />
+      <Surface />
       <axesHelper args={[10]} />
     </React.Fragment>
   );
-};
+});
 
-export default () => {
+export default React.memo(() => {
   return (
     <Canvas
       camera={{
@@ -42,4 +41,4 @@ export default () => {
       </Provider>
     </Canvas>
   );
-};
+});

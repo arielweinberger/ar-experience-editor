@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
-import * as THREE from 'three';
-import { Plane } from 'drei';
+import React from 'react';
 import { GridHelper } from 'three';
+import { useThree } from 'react-three-fiber';
 
-function Surface({ scene }) {
+function Surface() {
+  const { scene } = useThree();
+
   const gridHelper = new GridHelper(20, 20);
   scene.add(gridHelper);
 

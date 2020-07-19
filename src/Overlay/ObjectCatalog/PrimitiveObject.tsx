@@ -65,6 +65,8 @@ function PrimitiveObjectInternal(props) {
 }
 
 export default (props) => {
+  const { objectType, onClick } = props;
+
   const callbacks = {
     onPointerEnter: () => {},
     onPointerLeave: () => {},
@@ -77,9 +79,10 @@ export default (props) => {
         camera={{ zoom: 2.5 }}
         onPointerEnter={() => callbacks.onPointerEnter()}
         onPointerLeave={() => callbacks.onPointerLeave()}
+        onClick={() => onClick()}
       >
         <PrimitiveObjectInternal
-          objectType={props.objectType}
+          objectType={objectType}
           registerPointerEnterCallback={(cb) => (callbacks.onPointerEnter = cb)}
           registerPointerLeaveCallback={(cb) => (callbacks.onPointerLeave = cb)}
         />

@@ -1,7 +1,6 @@
 import { SceneState } from './types';
 import { addSceneObject } from './addSceneObject';
 import { SceneActions } from '../../actions/scene';
-import { syncObjectsFromThreeToState } from './helpers';
 
 const initialState: SceneState = {
   scene: null,
@@ -25,8 +24,15 @@ const scene = (state: SceneState = initialState, action) => {
       save(state);
       break;
     case SceneActions.OBJECT_TRANSLATE_END:
-      const objects = syncObjectsFromThreeToState(state);
-      state.objects = objects;
+      const threeObject = action.object;
+      const sceneObject = state.objects.find(obj => obj.sceneObjectId === threeObject.exp_sceneObjectId);
+
+      sceneObject.threeProperties = {
+        scale: threeObject.scale,
+        position: threeObject.position,
+        rotation: threeObject.rotation,
+      };
+
       save(state);
       break;
   }

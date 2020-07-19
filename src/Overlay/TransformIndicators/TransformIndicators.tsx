@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Icon, SemanticICONS } from 'semantic-ui-react';
 import styled from '@emotion/styled';
-import { useControls } from '../../hooks/experienceHooks';
+import { useControls } from '../../hooks';
 
 const ButtonsContainer = styled.div`
   position: absolute;

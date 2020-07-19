@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import classNames from 'classnames';
 import TimeDisplay from './TimeDisplay';
 import TimelineRow from '../shared/TimelineRow';
-import { useScene, useControls } from '../../../hooks/experienceHooks';
+import { useScene, useControls } from '../../../hooks';
 
 const SidenavContainer = styled.div`
   width: 216px;
