@@ -12,3 +12,9 @@ export const setControlledObject = controlledObject => ({
   type: 'SET_CONTROLLED_OBJECT',
   controlledObject,
 });
+
+export default {
+  setOrbitEnabled,
+  setTransformMode,
+  setControlledObject,
+}

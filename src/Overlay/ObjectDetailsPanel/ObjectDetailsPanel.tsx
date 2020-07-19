@@ -1,9 +1,8 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import ExpandableSection from '../components/ExpandableSection/ExpandableSection';
 import TransformDetails from './TransformDetails/TransformDetails';
-import { objectTranslateEnd } from '../../actions/scene';
 import styled from '@emotion/styled';
+import { useControls, useScene } from '../../hooks/experienceHooks';
 
 const ObjectDetailsPanelContainer = styled.div`
   h1 {
@@ -15,8 +14,8 @@ const ObjectDetailsPanelContainer = styled.div`
 `;
 
 export default function ObjectDetailsPanel() {
-  const { controlledObject } = useSelector(state => state.controls);
-  const dispatch = useDispatch();
+  const { controlledObject } = useControls();
+  const { objectTranslateEnd } = useScene();
 
   const renderControlledObject = () => {
     if (!controlledObject) {
@@ -30,7 +29,7 @@ export default function ObjectDetailsPanel() {
         <h1>{name}</h1>
 
         <ExpandableSection label="Transform">
-          <TransformDetails object={controlledObject} onTransformChange={() => dispatch(objectTranslateEnd(controlledObject))} />
+          <TransformDetails object={controlledObject} onTransformChange={objectTranslateEnd} />
         </ExpandableSection>
       </React.Fragment>
     );

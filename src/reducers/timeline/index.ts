@@ -2,15 +2,16 @@ import { TimelineState } from './types';
 
 const initialState = {
   selectedKeyframe: null,
+  thumbLocation: 0,
   keyframes: {
-    Cone_0r9dlqw1L: [
+    Cylinder_2JbJ8abwJ: [
       {
         id: 'rand0',
-        time: 500,
+        time: 50,
       },
       {
         id: 'rand1',
-        time: 1500,
+        time: 100,
       },
     ],
   },
@@ -21,6 +22,9 @@ const timeline = (state = initialState, action) => {
     case 'SET_SELECTED_KEYFRAME':
       state.selectedKeyframe = action.keyframeId;
       break;
+
+    case 'SET_THUMB_LOCATION':
+      state.thumbLocation = action.location;
   }
 
   return state;

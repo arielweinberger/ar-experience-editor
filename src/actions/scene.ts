@@ -27,3 +27,10 @@ export const addBulkSceneObjects = objects => ({
   type: SceneActions.ADD_BULK_SCENE_OBJECTS,
   objects,
 });
+
+export default {
+  registerScene,
+  objectTranslateEnd,
+  addSceneObject,
+  addBulkSceneObjects,
+}

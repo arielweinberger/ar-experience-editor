@@ -37,7 +37,7 @@ export default function TransformDetails({ object, onTransformChange }) {
       value={object[metric.name][property]}
       onChangeApplied={val => {
         object[metric.name][property] =  val
-        onTransformChange();
+        onTransformChange(object);
       }} />
   ));
 

@@ -1,9 +1,7 @@
 import React from 'react'
 import { Button, Icon, SemanticICONS } from 'semantic-ui-react';
-import { useDispatch } from 'react-redux';
-
-import { setTransformMode } from '../../actions/controls';
 import styled from '@emotion/styled';
+import { useControls } from '../../hooks/experienceHooks';
 
 const ButtonsContainer = styled.div`
   position: absolute;
@@ -28,23 +26,23 @@ interface TransformButton {
 }
 
 export default function TransformIndicators() {
-  const dispatch = useDispatch();
+  const { setTransformMode } = useControls();
 
   const buttons: TransformButton[] = [
     {
       description: 'Rotate',
       icon: 'sync alternate',
-      onClick: () => dispatch(setTransformMode('rotate')),
+      onClick: () => setTransformMode('rotate'),
     },
     {
       description: 'Translate',
       icon: 'arrows alternate',
-      onClick: () => dispatch(setTransformMode('translate')),
+      onClick: () => setTransformMode('translate'),
     },
     {
       description: 'Scale',
       icon: 'expand',
-      onClick: () => dispatch(setTransformMode('scale')),
+      onClick: () => setTransformMode('scale'),
     },
   ];
 

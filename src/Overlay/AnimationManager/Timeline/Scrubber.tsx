@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Thumb from './Thumb';
+import { useTimeline } from '../../../hooks/experienceHooks';
 
 const ScrubberContainer = styled.div`
   overflow: hidden;
@@ -36,20 +37,23 @@ const Label = styled.div`
   left: -15px;
 `;
 
+const generateLabels = () => {
+  let labels = [];
+
+  for(let i = 0; i < 120; i = i + 0.5) {
+    labels.push(<Label key={i}>{i}</Label>);
+  }
+
+  return labels;
+};
+
 const Timeline = () => {
-  const generateLabels = () => {
-    let labels = [];
+  const { thumbLocation, setThumbLocation } = useTimeline();
 
-    for(let i = 0; i < 120; i = i + 0.5) {
-      labels.push(<Label key={i}>{i}</Label>);
-    }
-
-    return labels;
-  };
 
   return (
     <ScrubberContainer>
-      <Thumb time={100} />
+      <Thumb time={thumbLocation} onLocationChange={setThumbLocation} />
       <RulerContainer>
         <LabelsContainer>
           {generateLabels()}

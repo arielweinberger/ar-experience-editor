@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import thumbSvg from './thumb.svg';
 
@@ -12,8 +12,8 @@ const Thumb = styled.div<{ time: number }>`
   height: 19px;
   width: 13px;
   position: absolute;
-  transform: translate3d(${props => props.time + 4}px, 0px, 0px);
   top: 6px;
+  transform: translate3d(${(props) => props.time + 4}px, 0px, 0px);
   background-image: url(${thumbSvg});
 `;
 
@@ -21,7 +21,7 @@ const Guide = styled.div<{ time: number }>`
   height: 270px;
   width: 1px;
   position: absolute;
-  transform: translate3d(${props => props.time + 10}px, 0px, 0px);
+  transform: translate3d(${(props) => props.time + 10}px, 0px, 0px);
   top: 24px;
   border-style: solid;
   border-width: 0px 0px 0px 1px;
@@ -59,25 +59,34 @@ const HiddenRangeInput = styled.input`
   }
 `;
 
-function round (N, pre) {
+function round(N, pre) {
   return Math.round(N / pre) * pre;
 }
 
 const Timeline = (props) => {
-  const [time, setTime] = useState(props.time)
+  const { onLocationChange } = props;
+  const [time, setTime] = useState(props.time);
 
-  const handleThumbInput = e => {
+  const handleThumbInput = (e) => {
     const value = round(e.target.value, 10);
     setTime(value);
+    onLocationChange(value)
   };
 
   return (
     <ThumbContainer>
       <Thumb time={time} />
-      <HiddenRangeInput type="range" step="1" min="0" max="6000" defaultValue={time} onChange={handleThumbInput} />
+      <HiddenRangeInput
+        type="range"
+        step="1"
+        min="0"
+        max="6000"
+        defaultValue={time}
+        onChange={handleThumbInput}
+      />
       <Guide time={time} />
     </ThumbContainer>
-  )
-}
+  );
+};
 
-export default Timeline
+export default Timeline;

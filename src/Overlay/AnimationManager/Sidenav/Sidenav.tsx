@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import classNames from 'classnames';
 import TimeDisplay from './TimeDisplay';
+import TimelineRow from '../shared/TimelineRow';
+import { useScene, useControls } from '../../../hooks/experienceHooks';
 
 const SidenavContainer = styled.div`
   width: 216px;
@@ -16,35 +19,49 @@ const List = styled.div`
   padding-bottom: 15px;
 `;
 
-const Item = styled.div`
-  height: 29px;
-  display: flex;
-  align-items: center;
-  padding: 4px;
+// const Item = styled.div`
+//   height: 29px;
+//   display: flex;
+//   align-items: center;
+//   padding: 4px;
 
-  &:hover {
-    cursor: pointer;
-  }
+//   &:hover {
+//     cursor: pointer;
+//   }
 
-  &.selected {
-    background: rgb(226, 237, 251);;
-    border: 1px solid rgb(160, 201, 240);
-    border-width: 1px 0px 1px 1px;
-  }
-`;
+//   &.selected {
+//     background: rgb(226, 237, 251);
+//     border: 1px solid rgb(160, 201, 240);
+//     border-width: 1px 0px 1px 1px;
+//   }
+// `;
 
-const Sidenav = () => {
-  
+export default function Sidenav() {
+  const { objects } = useScene();
+  const { controlledObject } = useControls();
+
+  const renderObjects = () =>
+    objects.map((object) => {
+      let className = '';
+
+      if (controlledObject) {
+        className = classNames({ selected: object.sceneObjectId === controlledObject.exp_sceneObjectId });
+      }
+
+      return (
+        <TimelineRow
+          key={object.sceneObjectId}
+          className={className}
+        >
+            {object.name}
+        </TimelineRow>
+      );
+    });
+
   return (
     <SidenavContainer>
       <TimeDisplay />
-      <List>
-        <Item className="selected"><p>Box</p></Item>
-        <Item><p>Cone</p></Item>
-        <Item><p>Sphere</p></Item>
-      </List>
+      <List>{renderObjects()}</List>
     </SidenavContainer>
   );
-};
-
-export default Sidenav;
+}
